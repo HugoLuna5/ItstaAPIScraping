@@ -12,6 +12,7 @@ import student from './src/routes/studen'
 import kardex from './src/routes/kardex'
 import paymentServices from './src/routes/payment_services'
 import complementaryActivities from './src/routes/complementary_activities'
+import schedule from './src/routes/schedule'
 
 dotenv.config();
 
@@ -46,6 +47,7 @@ app.use('/api/v1/student', student);
 app.use('/api/v1/kardex', kardex);
 app.use('/api/v1/payment_services', paymentServices);
 app.use('/api/v1/complementary_activities', complementaryActivities);
+app.use('/api/v1/schedule', schedule);
 
 
   /**

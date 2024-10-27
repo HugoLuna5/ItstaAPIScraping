@@ -6,6 +6,9 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import passport from 'passport';
 import morgan from 'morgan';
+
+import auth from './src/routes/auth'
+
 dotenv.config();
 
 const app = express();
@@ -32,6 +35,9 @@ app.get("/", function (req: Request, res: Response) {
 
 
 // Calling routes
+
+
+app.use('/api/v1/auth', auth);
 
 
   /**

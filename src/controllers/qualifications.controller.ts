@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
 import puppeteer from 'puppeteer';
 
-export default class ScheduleController {
-    public async getSchedule(req: Request, res: Response): Promise<void> {
+export default class QualificationsController {
 
-        const { controlURL, passwordURL, psieURL, dummyURL } = req.body
+    public async getQualifications(req: Request, res: Response): Promise<void> {
+        
+        const { controlURL, passwordURL,  psieURL, dummyURL } = req.body
         console.log(req.body);
         const browser = await puppeteer.launch({
             headless: false,
@@ -12,7 +13,7 @@ export default class ScheduleController {
 
 
         const page = await browser.newPage();
-        const url = `${process.env.SERVER_PATH}Opc=HORARIO&Control=${controlURL}&Password=${passwordURL}&psie=${psieURL}&dummy=${dummyURL}`
+        const url = `${process.env.SERVER_PATH}Opc=CALIF&Control=${controlURL}&Password=${passwordURL}&psie=${psieURL}&dummy=${dummyURL}`
         console.log("url", url);
         await page.goto(url);
 
@@ -55,19 +56,17 @@ export default class ScheduleController {
 
         const elementsNotCorrectRemoved = elementsFiltered.filter((element, idx) =>  element.length > 1) 
 
-        
-
-        let schedule = [];
-        let archivedSchedule = [];
+        let qualifications = [];
+        let archivedQualifications = [];
 
         for (let i = 0; i < elementsNotCorrectRemoved.length; i++) {
 
             for (let j = 0; j < elementsNotCorrectRemoved[i].length; j++) {
                 if(elementsNotCorrectRemoved[i][j] !== null){
                     if(elementsNotCorrectRemoved[i][j].downloadable){
-                        archivedSchedule.push(elementsNotCorrectRemoved[i][j]);
+                        archivedQualifications.push(elementsNotCorrectRemoved[i][j]);
                     } else {
-                        schedule.push(elementsNotCorrectRemoved[i][j]);
+                        qualifications.push(elementsNotCorrectRemoved[i][j]);
                     }
                 }
             }
@@ -75,12 +74,9 @@ export default class ScheduleController {
 
 
 
-        console.log(archivedSchedule);
-
-        
         const data = {
-            schedule: schedule,
-            archivedSchedule: archivedSchedule,
+            qualifications: qualifications,
+            archivedQualifications: archivedQualifications,
         }
 
         setTimeout(async () => {
@@ -91,12 +87,14 @@ export default class ScheduleController {
         }, 1500);
 
 
+
+
     }
 
 
-    public async getArchivedSchedule(req: Request, res: Response): Promise<void> {
+    public async getArchivedQualifications(req: Request, res: Response): Promise<void> {
 
-
+        
         const { controlURL, passwordURL, periodURL, psieURL, dummyURL } = req.body
         console.log(req.body);
         const browser = await puppeteer.launch({
@@ -105,7 +103,7 @@ export default class ScheduleController {
 
 
         const page = await browser.newPage();
-        const url = `${process.env.SERVER_PATH}Opc=CARGA&Control=${controlURL}&Password=${passwordURL}&Periodo=${periodURL}&psie=${psieURL}&dummy=${dummyURL}`
+        const url = `${process.env.SERVER_PATH}Opc=BOLETA&Control=${controlURL}&Password=${passwordURL}&Periodo=${periodURL}&psie=${psieURL}&dummy=${dummyURL}`
         console.log("url", url);
         await page.goto(url);
 
@@ -127,8 +125,6 @@ export default class ScheduleController {
             res.status(200).json(data)
         }, 1500);
 
-
     }
-
 
 }

@@ -8,13 +8,14 @@ import passport from 'passport';
 import morgan from 'morgan';
 
 import auth from './src/routes/auth'
+import student from './src/routes/studen'
 
 dotenv.config();
 
 const app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, './src/views'));
 app.set('view engine', 'pug');
 
 app.use(cors());
@@ -38,6 +39,7 @@ app.get("/", function (req: Request, res: Response) {
 
 
 app.use('/api/v1/auth', auth);
+app.use('/api/v1/student', student);
 
 
   /**

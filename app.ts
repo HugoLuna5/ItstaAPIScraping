@@ -9,6 +9,7 @@ import morgan from 'morgan';
 
 import auth from './src/routes/auth'
 import student from './src/routes/studen'
+import kardex from './src/routes/kardex'
 
 dotenv.config();
 
@@ -40,6 +41,7 @@ app.get("/", function (req: Request, res: Response) {
 
 app.use('/api/v1/auth', auth);
 app.use('/api/v1/student', student);
+app.use('/api/v1/kardex', kardex);
 
 
   /**

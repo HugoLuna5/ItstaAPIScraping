@@ -7,7 +7,7 @@ export default class ScheduleController {
         const { controlURL, passwordURL, psieURL, dummyURL } = req.body
         console.log(req.body);
         const browser = await puppeteer.launch({
-            headless: false,
+            headless: true,
         });
 
 
@@ -100,7 +100,7 @@ export default class ScheduleController {
         const { controlURL, passwordURL, periodURL, psieURL, dummyURL } = req.body
         console.log(req.body);
         const browser = await puppeteer.launch({
-            headless: false,
+            headless: true,
         });
 
 

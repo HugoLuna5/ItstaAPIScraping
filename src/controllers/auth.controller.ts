@@ -9,7 +9,7 @@ export default class AuthController {
         const { username, password } = req.body
         console.log(req.body);
         const browser = await puppeteer.launch({
-            headless: false,
+            headless: true,
         });
     
         const page = await browser.newPage();
@@ -59,7 +59,7 @@ export default class AuthController {
             res.status(200).json({
                 result
             })
-        }, 1500)
+        }, 2000)
     
     
     

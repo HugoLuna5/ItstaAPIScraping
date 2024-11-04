@@ -9,7 +9,7 @@ export default class PaymentServicesController {
         const { controlURL, passwordURL, psieURL, dummyURL } = req.body
         console.log(req.body);
         const browser = await puppeteer.launch({
-            headless: false,
+            headless: true,
         });
 
 
